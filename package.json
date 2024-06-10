@@ -1,0 +1,31 @@
+{
+  "name": "redis-connection-race-bug",
+  "version": "1.0.0",
+  "description": "Minimal-ish reproduce of a race condition in ioredis and iovalkey when reconnecting to nodes running in cluster mode",
+  "keywords": [
+    "ioredis",
+    "iovalkey",
+    "bug",
+    "race",
+    "reconnect"
+  ],
+  "author": "Martin Slota",
+  "license": "ISC",
+  "homepage": "https://github.com/martinslota/redis-connection-race-bug#readme",
+  "bugs": {
+    "url": "https://github.com/martinslota/redis-connection-race-bug/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/martinslota/redis-connection-race-bug.git"
+  },
+  "type": "module",
+  "scripts": {
+    "reproduce-ioredis": "docker compose up --wait && ./loop.sh node reproduce-ioredis.js",
+    "reproduce-iovalkey": "docker compose up --wait && ./loop.sh node reproduce-iovalkey.js"
+  },
+  "dependencies": {
+    "ioredis": "^5.4.1",
+    "iovalkey": "^0.0.1"
+  }
+}

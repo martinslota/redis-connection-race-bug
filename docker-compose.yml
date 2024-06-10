@@ -1,0 +1,31 @@
+services:
+  redis-cluster:
+    image: grokzen/redis-cluster:7.0.10
+    environment:
+      INITIAL_PORT: "6380"
+      IP: "0.0.0.0"
+      SLAVES_PER_MASTER: "0"
+    ports:
+      - "6380-6382:6380-6382"
+    healthcheck:
+      test: ["CMD", "redis-cli", "-p", "6380", "-c", "ping"]
+      start_period: 30s
+      start_interval: 1s
+      interval: 60s
+      timeout: 1s
+
+  valkey-cluster:
+    build:
+      context: valkey-cluster
+    environment:
+      INITIAL_PORT: "6390"
+      IP: "0.0.0.0"
+      SLAVES_PER_MASTER: "0"
+    ports:
+      - "6390-6392:6390-6392"
+    healthcheck:
+      test: ["CMD", "valkey-cli", "-p", "6390", "-c", "ping"]
+      start_period: 30s
+      start_interval: 1s
+      interval: 60s
+      timeout: 1s
